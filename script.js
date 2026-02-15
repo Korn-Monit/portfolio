@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dates: "2025 - Present",
             description: `
             <ul class="experience-list">
-                <li>Working in AI team to build and deliver company AI products and AI Agent applications.Working in AI team to build and deliver company AI products and AI Agent applications.</li>
+                <li>Working in AI team to build and deliver company AI products and AI Agent applications.</li>
             </ul>
             `,
         },
