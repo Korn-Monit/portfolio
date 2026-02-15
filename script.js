@@ -5,10 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add Experience Data
     const experience = [
+            {
+            title: "AI Engineer",
+            company: "Fime",
+            dates: "2024 - Present",
+            description: `
+            <ul class="experience-list">
+                <li>Working in AI team to build and deliver company AI products and AI Agent applications.Working in AI team to build and deliver company AI products and AI Agent applications.</li>
+            </ul>
+            `,
+        },
         {
             title: "AI Engineer",
             company: "Cosywee",
-            dates: "2024 - Present",
+            dates: "2024 - 2025",
             description: `
             <ul class="experience-list">
                 <li>Currently curating and expanding datasets to improve Optical Character Recognition (OCR) performance.</li>
