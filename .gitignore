@@ -1,0 +1,8 @@
+blog/drafts/*
+!blog/drafts/.gitkeep
+
+blog/posts/*
+blog/getting-started-with-this-blog
+blog/README.md
+AGENTS.md
+.agents/
