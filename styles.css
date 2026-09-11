@@ -13,6 +13,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-padding-top: 5rem;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -36,6 +40,9 @@ nav {
     background: rgba(13, 17, 23, 0.8);
     backdrop-filter: blur(10px);
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     width: 100%;
     padding: 1rem 0;
 }
@@ -124,6 +131,18 @@ nav {
 }
 
 .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.skills-group h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.skill-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
@@ -210,7 +229,7 @@ nav {
         font-size: 2.5rem;
     }
     
-    .skills-grid {
+    .skill-list {
         grid-template-columns: repeat(2, 1fr);
     }
 }

@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
             dates: "2025 - Present",
             description: `
             <ul class="experience-list">
-                <li>Working in AI team to build and deliver company AI products and AI Agent applications.</li>
+                <li>Working in AI team </li>
+                <li>Building and delivering company AI products and AI Agent applications for internal expert and external customers.</li>
             </ul>
             `,
         },
@@ -212,13 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas);
 
     // Dynamic Content
-    const skills = [
-        'Python', 'TensorFlow', 'PyTorch', 'FastAPI', 'Flask', 'JavaScript', 'PHP', 'MLops',
-        'Laravel', 'Streamlit', 'Shell Scripting', 'Vue.js', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'Docker', 'Google Cloud Platform', 'LangChain','LangGraph',
-        'NLP','Computer Vision' ,'Deep Learning', 'Deep Reinforcement Learning', 'LLM', 'Linux',
-        'Git', 'Machine Learning', 'PERT', 'OCR', 'Object Detection', 'Object Classification',
-        'Web Development',
-    ];
+    const skills = {
+        technologies: [
+            'Python', 'PyTorch', 'FastAPI', 'JavaScript',
+            'Shell Scripting', 'Vue.js', 'HTML/CSS', 'Docker',
+            'Google Cloud Platform', 'LangChain','LangGraph', 'Linux', 'Git'
+        ],
+        aiAreas: [
+            'AI Agents', "RAG", "MCP",
+            'Deep Learning',
+            'Deep Reinforcement Learning', 'LLM', 'OCR',
+            'Software Development',
+        ]
+    };
 
     const projects = [
          {
@@ -346,11 +353,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate Skills
     const skillsGrid = document.querySelector('.skills-grid');
-    skills.forEach(skill => {
-        const div = document.createElement('div');
-        div.className = 'skill-card';
-        div.textContent = skill;
-        skillsGrid.appendChild(div);
+    const skillGroups = [
+        { title: 'Technology', items: skills.technologies },
+        { title: 'AI / ML / Tech Areas', items: skills.aiAreas }
+    ];
+
+    skillGroups.forEach(group => {
+        const section = document.createElement('div');
+        section.className = 'skills-group';
+        section.innerHTML = `<h3>${group.title}</h3>`;
+
+        const list = document.createElement('div');
+        list.className = 'skill-list';
+
+        group.items.forEach(skill => {
+            const div = document.createElement('div');
+            div.className = 'skill-card';
+            div.textContent = skill;
+            list.appendChild(div);
+        });
+
+        section.appendChild(list);
+        skillsGrid.appendChild(section);
     });
 
     // Populate Projects
@@ -368,16 +392,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Check for anchor link on page load
-    window.addEventListener('DOMContentLoaded', () => {
-        const hash = window.location.hash.substring(1); // Get #id from URL
-        if (hash) {
-            const project = document.getElementById(hash);
-            if (project) {
-                project.scrollIntoView({ behavior: 'smooth' });
-                project.style.backgroundColor = '#f8f9fa'; // Optional highlight
-            }
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        const project = document.getElementById(hash);
+        if (project) {
+            project.scrollIntoView({ behavior: 'smooth' });
         }
-    });
+    }
 
     // Mobile Menu
     const menuBtn = document.querySelector('.menu-btn');
