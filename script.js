@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
             dates: "2025 - Present",
             description: `
             <ul class="experience-list">
-                <li>Working in AI team </li>
-                <li>Building and delivering company AI products and AI Agent applications for internal expert and external customers.</li>
+                <li>Develop AI Agent applications using both internally built agent harnesses and external frameworks and SDKs, adapting the approach to different internal and customer-facing use cases.</li>
+                <li>Design AI solutions with architects, integrate agentic workflows into applications, and deploy production-ready features.</li>
+                <li>Build prototypes and proofs of concept, propose technical solutions, and support the team in solving problem.</li>
             </ul>
             `,
         },
