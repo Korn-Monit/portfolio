@@ -6,3 +6,7 @@ blog/getting-started-with-this-blog
 blog/README.md
 AGENTS.md
 .agents/
+/blog/done
+.venv/
+__pycache__/
+*.pyc

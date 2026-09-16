@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harness | Technical Blog</title>
+  <meta name="description" content="Technical writing, notes, and engineering articles by Anas.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../blog/blog.css">
+</head>
+<body>
+  <main class="blog-shell">
+    <header class="blog-header">
+      <a class="blog-home-link" href="../../index.html">Portfolio</a>
+      <a class="blog-home-link" href="../../blog/">Blog</a>
+    </header>
+    <article class="blog-article">
+  <header>
+    <p class="blog-kicker">Technical Blog</p>
+    <h1>Harness</h1>
+    <div class="blog-meta">
+      <time datetime="2026-09-01">2026-09-01</time>
+      <div class="blog-tags"><span>AI Agent</span> <span>AI</span></div>
+    </div>
+  </header>
+  <div class="blog-content">
+    <p>When we talk about AI agents or multi-agent systems, we often hear the word <strong>harness</strong>. But what exactly does it mean?</p>
+<p>An <strong>agent harness</strong> is the system surrounding an LLM that allows it to interact with tools and its environment in order to accomplish a specific objective.</p>
+<p>These tools can include things such as <code>read</code>, <code>grep</code>, <code>glob</code>, web search, APIs, databases, terminals, and many others depending on the problem we are trying to solve.</p>
+<p>We can think of an agent harness like the human body. Our hands, legs, and eyes are tools, while the brain decides how and when to use them in order to achieve a specific goal.</p>
+<p>In this analogy, the <strong>LLM acts like the brain</strong>, while the harness provides the tools and the mechanism that allows the LLM to use them.</p>
+<p>For example, imagine asking Claude Code to find a particular function inside a codebase. The LLM understands our request in natural language and may decide to use tools such as <code>grep</code>, <code>glob</code>, or <code>read</code> to locate the relevant file and inspect its contents.</p>
+<p>A simplified flow might look like this:</p>
+<pre><code class="language-text">User Request
+     ↓
+    LLM
+     ↓
+Select a Tool
+     ↓
+Execute the Tool
+     ↓
+Observe the Result
+     ↓
+    LLM
+     ↓
+Continue or Return an Answer
+</code></pre>
+<p>The important part is that the LLM does not directly search the filesystem itself. Instead, it decides which tool should be used, provides the appropriate arguments, observes the result, and then decides what to do next.</p>
+<p>This repeated process is often referred to as an <strong>agent loop</strong>:</p>
+<pre><code class="language-text">Reason → Act → Observe → Reason → ...
+</code></pre>
+<p>The explanation above gives us a simple view of an agent harness, but a real-world harness usually contains much more than just an LLM and a collection of tools.</p>
+<p>It may also handle concepts such as <strong>context management, memory, tool permissions, multi-agent coordination, error handling, model routing, and context engineering techniques such as compaction and summarization</strong>.</p>
+<p>These components are what make an LLM capable of behaving more like an autonomous agent rather than simply responding to a single prompt.</p>
+
+  </div>
+</article>
+  </main>
+</body>
+</html>

@@ -1,12 +1,15 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import html
 import re
+import shutil
 from dataclasses import dataclass
 from datetime import datetime
 from email.utils import format_datetime
 from pathlib import Path
 from typing import Iterable
+
+from markdown_it import MarkdownIt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +17,7 @@ POSTS_DIR = ROOT / "blog" / "posts"
 BLOG_DIR = ROOT / "blog"
 SITE_TITLE = "Technical Blog"
 AUTHOR = "Anas"
+MARKDOWN_RENDERER = MarkdownIt("commonmark", {"html": False})
 
 
 @dataclass(frozen=True)
@@ -29,6 +33,7 @@ class Post:
 
 
 def parse_frontmatter(raw: str, source: Path) -> tuple[dict[str, str], str]:
+    raw = raw.lstrip("\ufeff").replace("\r\n", "\n").replace("\r", "\n")
     if not raw.startswith("---\n"):
         raise ValueError(f"{source} is missing frontmatter")
 
@@ -69,11 +74,12 @@ def load_posts() -> list[Post]:
         if not title or not date:
             raise ValueError(f"{path} needs title and date frontmatter")
 
+        slug_source = metadata.get("slug") or title
         posts.append(
             Post(
                 title=title,
                 date=date,
-                slug=metadata.get("slug") or slugify(title),
+                slug=slugify(slug_source),
                 tags=parse_tags(metadata.get("tags", "")),
                 summary=metadata.get("summary", ""),
                 visibility=metadata.get("visibility", "private").lower(),
@@ -86,84 +92,7 @@ def load_posts() -> list[Post]:
 
 
 def markdown_to_html(markdown: str) -> str:
-    blocks: list[str] = []
-    paragraph: list[str] = []
-    in_code = False
-    code_lines: list[str] = []
-    code_lang = ""
-    list_items: list[str] = []
-
-    def flush_paragraph() -> None:
-        if paragraph:
-            blocks.append(f"<p>{inline_format(' '.join(paragraph))}</p>")
-            paragraph.clear()
-
-    def flush_list() -> None:
-        if list_items:
-            blocks.append("<ul>" + "".join(f"<li>{item}</li>" for item in list_items) + "</ul>")
-            list_items.clear()
-
-    for raw_line in markdown.splitlines():
-        line = raw_line.rstrip()
-
-        if line.startswith("```"):
-            if in_code:
-                blocks.append(
-                    f'<pre><code class="language-{html.escape(code_lang)}">'
-                    + html.escape("\n".join(code_lines))
-                    + "</code></pre>"
-                )
-                in_code = False
-                code_lines.clear()
-                code_lang = ""
-            else:
-                flush_paragraph()
-                flush_list()
-                in_code = True
-                code_lang = line[3:].strip()
-            continue
-
-        if in_code:
-            code_lines.append(raw_line)
-            continue
-
-        if not line.strip():
-            flush_paragraph()
-            flush_list()
-            continue
-
-        heading = re.match(r"^(#{1,3})\s+(.+)$", line)
-        if heading:
-            flush_paragraph()
-            flush_list()
-            level = len(heading.group(1))
-            blocks.append(f"<h{level}>{inline_format(heading.group(2))}</h{level}>")
-            continue
-
-        item = re.match(r"^[-*]\s+(.+)$", line)
-        if item:
-            flush_paragraph()
-            list_items.append(inline_format(item.group(1)))
-            continue
-
-        paragraph.append(line)
-
-    flush_paragraph()
-    flush_list()
-    return "\n".join(blocks)
-
-
-def inline_format(text: str) -> str:
-    escaped = html.escape(text)
-    escaped = re.sub(r"`([^`]+)`", r"<code>\1</code>", escaped)
-    escaped = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", escaped)
-    escaped = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", escaped)
-    escaped = re.sub(
-        r"\[([^\]]+)\]\((https?://[^)]+)\)",
-        r'<a href="\2" rel="noopener noreferrer">\1</a>',
-        escaped,
-    )
-    return escaped
+    return MARKDOWN_RENDERER.render(markdown)
 
 
 def render_page(title: str, content: str, depth: int = 1) -> str:
@@ -243,6 +172,14 @@ def render_post(post: Post) -> str:
 def write_blog(posts: list[Post]) -> None:
     BLOG_DIR.mkdir(exist_ok=True)
     public_posts = [post for post in posts if post.visibility == "public"]
+    public_slugs = {post.slug for post in public_posts}
+    reserved_dirs = {POSTS_DIR.resolve(), (BLOG_DIR / "drafts").resolve(), (BLOG_DIR / "done").resolve()}
+
+    for path in BLOG_DIR.iterdir():
+        if not path.is_dir() or path.resolve() in reserved_dirs:
+            continue
+        if path.name not in public_slugs and (path / "index.html").exists():
+            shutil.rmtree(path)
 
     (BLOG_DIR / "index.html").write_text(render_index(public_posts), encoding="utf-8")
     for post in public_posts:
@@ -256,5 +193,7 @@ def write_blog(posts: list[Post]) -> None:
 
 if __name__ == "__main__":
     write_blog(load_posts())
+
+
 
 

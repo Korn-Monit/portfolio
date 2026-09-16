@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why RAG alone is not enough | Technical Blog</title>
+  <meta name="description" content="Technical writing, notes, and engineering articles by Anas.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../blog/blog.css">
+</head>
+<body>
+  <main class="blog-shell">
+    <header class="blog-header">
+      <a class="blog-home-link" href="../../index.html">Portfolio</a>
+      <a class="blog-home-link" href="../../blog/">Blog</a>
+    </header>
+    <article class="blog-article">
+  <header>
+    <p class="blog-kicker">Technical Blog</p>
+    <h1>Why RAG alone is not enough</h1>
+    <div class="blog-meta">
+      <time datetime="2025-09-06">2025-09-06</time>
+      <div class="blog-tags"><span>RAG</span> <span>AI</span></div>
+    </div>
+  </header>
+  <div class="blog-content">
+    <p>Retrieval-Augmented Generation (RAG) has become a popular method for building AI-based chatbots, especially because it allows developers to harness the power of large language models (LLMs) <strong>without training them from scratch</strong>. But as more real-world use cases emerge, the limitations of standard RAG systems are becoming clearer.</p>
+<p>In this post, I’ll talk:</p>
+<ol>
+<li>What RAG is and how it works</li>
+<li>The limitations of traditional RAG</li>
+<li>How Agentic RAG overcomes these limitations</li>
+<li>What you need to build an Agentic RAG system</li>
+</ol>
+<hr />
+<h2>1. What Is RAG?</h2>
+<p>RAG stands for <strong>Retrieval-Augmented Generation</strong>. It’s a framework or method that enables you to build an AI chatbot without training your own model. Instead, you use a <strong>pre-trained LLM</strong> (like GPT-4, Mistral, or Llama) and <strong>feed it custom data</strong> at runtime by retrieving relevant documents from a database.</p>
+<h3>🔧 Core Components of a RAG System:</h3>
+<ul>
+<li><strong>LLM</strong>: A large language model (pre-trained)</li>
+<li><strong>Embedding Model</strong>: Converts user queries and documents into vectors</li>
+<li><strong>Vector Database</strong>: Stores document embeddings (e.g., ChromaDB, FAISS, Weaviate)</li>
+<li><strong>Custom Data</strong>: Your knowledge base (e.g., PDFs, product docs)</li>
+</ul>
+<h3>⚙️ How It Works:</h3>
+<p><img src="https://cdn.khmercoder.com/8d35006d-c379-4952-9117-42eec154c724.png" alt="RAG diagram" /></p>
+<ol>
+<li>The user submits a query</li>
+<li>The query is converted to an embedding or vector representation by retrieval(embedding model)</li>
+<li>The embedding is compared to the data in database</li>
+<li>The most relevant documents are retrieved</li>
+<li>The LLM uses these documents as context to generate a response</li>
+</ol>
+<hr />
+<h2>2. Limitations of RAG</h2>
+<p>Despite its usefulness, RAG has <strong>some serious limitations</strong> that prevent it from functioning as a truly intelligent system:</p>
+<ul>
+<li>❌ <strong>No decision-making</strong>: The model can’t decide <em>when</em> or <em>what</em> to retrieve — it just retrieves every time.</li>
+<li>❌ <strong>No tool use</strong>: It cannot interact with APIs, call databases, or use calculators.</li>
+<li>❌ <strong>Hallucinations</strong>: Even with retrieved documents, the LLM might still fabricate information.</li>
+</ul>
+<hr />
+<h2>3. Enter Agentic RAG</h2>
+<p>To solve these issues, we need something smarter — <strong>Agentic RAG</strong>. This builds on top of RAG by adding <strong>decision-making and tool use capabilities</strong>, turning the system into a more autonomous <strong>agent</strong>.</p>
+<h3>🤖 What Makes Agentic RAG Different?</h3>
+<ul>
+<li>✅ <strong>Decides when to retrieve</strong> data</li>
+<li>✅ <strong>Can call tools</strong>, such as APIs, databases, or plugins</li>
+<li>✅ <strong>Follows workflows</strong> and can chain multiple actions</li>
+</ul>
+<blockquote>
+<p>Example: When a user asks &quot;What’s the weather in PhnomPenh tomorrow?&quot;, the agent can call a weather API instead of just searching static documents.</p>
+</blockquote>
+<hr />
+<h2>4. What You Need to Build Agentic RAG</h2>
+<p>To move from RAG to <strong>Agentic RAG</strong>, your system will need:</p>
+<h3>🧠 LLM with Tool Calling</h3>
+<ul>
+<li>Must support function calling (e.g., GPT-4, Claude, or open source model such as Qwen, DeepSeek....)</li>
+</ul>
+<h3>🛠️ Tool Definitions</h3>
+<ul>
+<li>Tools could be:
+<ul>
+<li>API connectors</li>
+<li>SQL query tools</li>
+<li>Python calculators</li>
+<li>Web search tools</li>
+</ul>
+</li>
+</ul>
+<h3>🗄️ Databases</h3>
+<ul>
+<li><strong>Vector Databases</strong>: For similarity search</li>
+<li><strong>Relational Databases</strong>: For structured, tabular data</li>
+</ul>
+<h3>🧩 Orchestration Layer</h3>
+<ul>
+<li>Tools like <strong>LangChain</strong>, <strong>LangGraph</strong>, or <strong>custom logic</strong> help manage:
+<ul>
+<li>Tool usage</li>
+<li>Memory</li>
+<li>Multi-step reasoning</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>Example of Agentic RAG in a Real Use Case</h2>
+<p><img src="https://cdn.khmercoder.com/48ace16b-20fd-4bcc-be5b-4c43dc7d13ff.png" alt="Agentic RAG diagram" /></p>
+<p>The diagram above illustrates an <strong>Agentic RAG architecture</strong> for an online electronics store, where product information is stored in two databases — a <strong>vector database</strong> and a <strong>relational database</strong>.</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>A customer submits a query in the chatbot.</li>
+<li>The agent decides whether to respond directly or call a tool.
+<ul>
+<li>Example: If the customer simply says, “Hi,” the agent replies directly without accessing any database.</li>
+</ul>
+</li>
+<li>If the query requires data lookup, the agent calls the relevant tool to retrieve information:
+<ul>
+<li><strong>Company-related queries</strong> (e.g., “Where is your nearest store?”) are answered directly from the vector database, which contains general company knowledge and FAQs.</li>
+<li><strong>Product-specific queries</strong> (e.g., “What’s the price of the iPhone 15 Pro?”) trigger an API call to the relational database, which holds up-to-date product details such as prices and stock levels.<br />
+If the retrieved data doesn’t match the question’s intent, the LLM reformulates the query and sends it back to the query node for another search.</li>
+</ul>
+</li>
+<li>The LLM then uses both the question and the retrieved data to produce a final answer for the customer.</li>
+</ol>
+<hr />
+
+  </div>
+</article>
+  </main>
+</body>
+</html>

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <ul class="experience-list">
                 <li>Develop AI Agent applications using both internally built agent harnesses and external frameworks and SDKs, adapting the approach to different internal and customer-facing use cases.</li>
                 <li>Design AI solutions with architects, integrate agentic workflows into applications, and deploy production-ready features.</li>
-                <li>Build prototypes and proofs of concept, propose technical solutions, and support the team in solving problem.</li>
+                <li>Fine tune LLM, build prototypes and proofs of concept, propose technical solutions, and support the team in solving problem.</li>
             </ul>
             `,
         },
