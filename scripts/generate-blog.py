@@ -18,6 +18,8 @@ BLOG_DIR = ROOT / "blog"
 SITE_TITLE = "Technical Blog"
 AUTHOR = "Anas"
 MARKDOWN_RENDERER = MarkdownIt("commonmark", {"html": False})
+MERMAID_BLOCK_RE = re.compile(r'<pre><code class="language-mermaid">\n?(.*?)</code></pre>', re.DOTALL)
+MERMAID_FENCE_RE = re.compile(r"^```mermaid\b", re.MULTILINE)
 
 
 @dataclass(frozen=True)
@@ -92,11 +94,24 @@ def load_posts() -> list[Post]:
 
 
 def markdown_to_html(markdown: str) -> str:
-    return MARKDOWN_RENDERER.render(markdown)
+    rendered = MARKDOWN_RENDERER.render(markdown)
+    return MERMAID_BLOCK_RE.sub(
+        lambda match: f'<div class="mermaid">\n{match.group(1).strip()}\n</div>',
+        rendered,
+    )
 
 
-def render_page(title: str, content: str, depth: int = 1) -> str:
+def render_page(title: str, content: str, depth: int = 1, enable_mermaid: bool = False) -> str:
     prefix = "../" * depth
+    mermaid_script = ""
+    if enable_mermaid:
+        mermaid_script = """
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    mermaid.initialize({ startOnLoad: true });
+  </script>"""
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,6 +130,7 @@ def render_page(title: str, content: str, depth: int = 1) -> str:
     </header>
     {content}
   </main>
+{mermaid_script}
 </body>
 </html>
 """
@@ -153,6 +169,7 @@ def render_index(posts: Iterable[Post]) -> str:
 def render_post(post: Post) -> str:
     tags = " ".join(f"<span>{html.escape(tag)}</span>" for tag in post.tags)
     body = re.sub(rf"^#\s+{re.escape(post.title)}\s*\n+", "", post.body, count=1)
+    has_mermaid = MERMAID_FENCE_RE.search(body) is not None
     content = f"""<article class="blog-article">
   <header>
     <p class="blog-kicker">Technical Blog</p>
@@ -166,7 +183,7 @@ def render_post(post: Post) -> str:
     {markdown_to_html(body)}
   </div>
 </article>"""
-    return render_page(post.title, content, depth=2)
+    return render_page(post.title, content, depth=2, enable_mermaid=has_mermaid)
 
 
 def write_blog(posts: list[Post]) -> None:

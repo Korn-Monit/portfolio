@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering | Technical Blog</title>
+  <meta name="description" content="Technical writing, notes, and engineering articles by Anas.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../blog/blog.css">
+</head>
+<body>
+  <main class="blog-shell">
+    <header class="blog-header">
+      <a class="blog-home-link" href="../../index.html">Portfolio</a>
+      <a class="blog-home-link" href="../../blog/">Blog</a>
+    </header>
+    <article class="blog-article">
+  <header>
+    <p class="blog-kicker">Technical Blog</p>
+    <h1>Context Engineering</h1>
+    <div class="blog-meta">
+      <time datetime="2026-10-13">2026-10-13</time>
+      <div class="blog-tags"><span>Context</span> <span>AI Agent</span></div>
+    </div>
+  </header>
+  <div class="blog-content">
+    <p><strong>How can an AI coding agent work with a codebase larger than its context window?</strong></p>
+<p>You've probably heard about <strong><strong>prompt engineering</strong></strong> already. But how about <strong><strong>context engineering</strong></strong>?</p>
+<p>Large language models (LLMs) have become remarkably capable at specific tasks: writing code, debugging software, reviewing pull requests, and analyzing documents. However, even a capable model needs the right information to do a task well.</p>
+<p>Imagine asking Claude Code to fix a bug in an existing application. You describe the problem in a prompt. The coding agent then explores the repository, searches for relevant functions, reads source files, and runs tests before making changes.</p>
+<p>The prompt is part of the context. So are the relevant source files, tool results, previous conversation messages, project instructions, and test failures the model receives. Together, these form the information available to the model at a given step.</p>
+<p>That raises an interesting question: <strong><strong>who decides what enters the context window, and when?</strong></strong></p>
+<p>This is where context engineering comes in.</p>
+<blockquote>
+<p><strong><strong>Context engineering is the practice of selecting, organizing, updating, and preserving the information an LLM receives so it can perform a task effectively.</strong></strong></p>
+</blockquote>
+<p>Unlike prompt engineering, which primarily focuses on the instructions we write, context engineering considers the entire information flow surrounding an LLM or agent. The two overlap: a well-designed prompt is itself part of good context engineering.</p>
+<h2>1. Why context engineering matters</h2>
+<p>Every LLM has a <strong><strong>context window</strong></strong>: a limit on how many tokens it can process in a particular model call. Those tokens may include instructions, conversation history, retrieved documents, code, tool outputs, and space allocated for the model's response. Exact accounting depends on the model and API.</p>
+<p>Let's use a hypothetical model with a <strong><strong>1-million-token</strong></strong> context window and a codebase that would take <strong><strong>2 million tokens</strong></strong> to represent as text. The model cannot ingest the whole codebase in a single request.</p>
+<p>But even if the entire codebase <strong>did</strong> fit, sending all of it might not be a good idea:</p>
+<ul>
+<li>
+<p><strong><strong>Relevance:</strong></strong> Much of the code may have nothing to do with the bug.</p>
+</li>
+<li>
+<p><strong><strong>Cost and latency:</strong></strong> Processing more tokens usually costs more and can take longer.</p>
+</li>
+<li>
+<p><strong><strong>Noise:</strong></strong> Unrelated files or old messages can distract the model from the immediate task.</p>
+</li>
+<li>
+<p><strong><strong>Conflicts:</strong></strong> Outdated instructions and contradictory tool outputs can create confusion.</p>
+</li>
+<li>
+<p><strong><strong>Limited attention to detail:</strong></strong> Long-context support does not guarantee that every detail will be used equally well.</p>
+</li>
+</ul>
+<p>The goal is not to maximize the amount of context. It is to maximize the <strong>usefulness</strong> of the context available at each step.</p>
+<p><strong><strong>Think of the context window as working memory, not as an archive of everything the agent has ever seen.</strong></strong></p>
+<h2>2. The coding-agent example: retrieve information when needed</h2>
+<p>Suppose a user reports that login fails after refreshing an authentication token. Instead of reading every file in the repository, the agent can investigate incrementally.</p>
+<p>A possible workflow:</p>
+<ol>
+<li>
+<p>Read the task and repository-specific instructions.</p>
+</li>
+<li>
+<p>Use filename discovery (such as <code>glob</code>) to find authentication-related files.</p>
+</li>
+<li>
+<p>Use search (such as <code>grep</code>) to locate <code>refreshToken</code>, token validation, and relevant error messages.</p>
+</li>
+<li>
+<p>Use <code>read</code> to inspect a few specific code regions, with a line range or offset when supported.</p>
+</li>
+<li>
+<p>Run a failing test to obtain concrete evidence.</p>
+</li>
+<li>
+<p>Read additional code only if the results make it necessary.</p>
+</li>
+<li>
+<p>Implement a fix and verify it with tests.</p>
+</li>
+</ol>
+<div class="mermaid">
+flowchart TD
+
+    A[User reports bug] --&gt; B[Read task and project instructions]
+
+    B --&gt; C[Find files with glob / search]
+
+    C --&gt; D[Read relevant code ranges]
+
+    D --&gt; E[Run tests and inspect errors]
+
+    E --&gt; F{Enough information?}
+
+    F -- No --&gt; C
+
+    F -- Yes --&gt; G[Edit code]
+
+    G --&gt; H[Run verification]
+</div>
+<p>The important point is that <strong><strong>the codebase remains outside the model's context window</strong></strong> until the agent selectively reads parts of it. Files on disk can be much larger than the model's current working context.</p>
+<p>This is closely related to retrieval-augmented generation (RAG). Both approaches aim to bring useful external information into a model's context. A coding agent, however, can often <strong>actively choose</strong> among search, file-reading, execution, and other tools, refining its search based on intermediate findings. It may use lexical search, semantic retrieval, or both.</p>
+<p>Tool outputs also need management. Printing a 30,000-line log into the conversation may technically work, but filtering it to the relevant stack trace and nearby errors is usually more useful.</p>
+<h2>3. Three context engineering techniques I find particularly useful</h2>
+<p>So far, we've seen how a coding agent can selectively retrieve the information it needs instead of reading an entire codebase. But retrieval is only part of the challenge. What happens when the conversation keeps growing, the task needs to be divided, or the agent has to remember progress across sessions?</p>
+<p>There are <strong>three context engineering techniques</strong> I find especially useful for these situations:</p>
+<ol>
+<li><strong>Compaction:</strong> Summarize accumulated context so the agent can continue working without carrying every previous message and tool output.</li>
+<li><strong>Sub-agents:</strong> Delegate focused tasks to agents with separate context windows and return only the relevant findings to the main agent.</li>
+<li><strong>Note-taking:</strong> Save important decisions, progress, and evidence outside the context window so the agent can retrieve them later.</li>
+</ol>
+<p>These techniques solve different problems. <strong>Compaction reduces context</strong>, <strong>sub-agents isolate context</strong>, and <strong>note-taking preserves context</strong>. They can also work together in the same agent workflow.</p>
+<h3>Technique 1: Compaction — keeping long-running agents on track</h3>
+<p>A coding agent can accumulate a surprising amount of context during one task: every user message, search result, test output, and explanation consumes tokens if retained in the conversation sent to the model.</p>
+<p><strong><strong>Compaction</strong></strong> addresses this by replacing part of that history with a shorter representation of the important information. An orchestration layer might trigger it when estimated token usage crosses a configured budget, at a milestone, or through an explicit action. The specific mechanism depends on the agent system.</p>
+<p>For example, imagine a hypothetical agent using a context budget of 100,000 tokens. After a long debugging session, the conversation approaches a chosen safety threshold. Rather than keep every intermediate tool result, the system could summarize the important state and continue from the summary.</p>
+<div class="mermaid">
+flowchart TD
+
+    A[Conversation and tool outputs accumulate] --&gt; B{Near context budget?}
+
+    B -- No --&gt; C[Continue task]
+
+    B -- Yes --&gt; D[Summarize important state]
+
+    D --&gt; E[Preserve plan, decisions, changed files, bugs, tests]
+
+    E --&gt; F[Replace or trim older history]
+
+    F --&gt; G[Continue with compressed context]
+
+    G --&gt; A
+</div>
+<h4>What should a good summary preserve?</h4>
+<p>For software development, I would explicitly ask a summarization step to preserve:</p>
+<ul>
+<li>
+<p>The user's original goal and acceptance criteria.</p>
+</li>
+<li>
+<p>The current plan and what has already been completed.</p>
+</li>
+<li>
+<p>Key architecture and design decisions, including why they were made.</p>
+</li>
+<li>
+<p>Files changed, relevant symbols, and important locations in the repository.</p>
+</li>
+<li>
+<p>Bugs fixed, bugs still open, and hypotheses not yet verified.</p>
+</li>
+<li>
+<p>Test commands, results, and known failures.</p>
+</li>
+<li>
+<p>Constraints: APIs, compatibility requirements, security considerations, and things that must not change.</p>
+</li>
+<li>
+<p>The next concrete action the agent should take.</p>
+</li>
+</ul>
+<p>For example, a compacted project-state file could look like this:</p>
+<pre><code class="language-yaml">
+task: Fix intermittent refresh-token failure
+
+status: implementation_in_progress
+
+completed:
+
+  - Reproduced the failure in auth integration tests
+
+  - Located refresh logic in src/auth/token_service.py
+
+  - Added regression test for expired refresh token
+
+open_issues:
+
+  - Check concurrent refresh behavior
+
+  - Rerun the full authentication test suite
+
+files_changed:
+
+  - src/auth/token_service.py
+
+  - tests/test_token_refresh.py
+
+constraints:
+
+  - Do not change the public authentication API
+
+next_step: Run targeted tests and inspect remaining failure
+
+</code></pre>
+<p>This is only an illustrative structure, not a universal format. A real system should preserve source-of-truth artifacts (files, commits, logs, test reports) outside the summary, and link back to them where possible.</p>
+<h4>The trade-off: summarization can lose important details</h4>
+<p>Compaction is <strong><strong>lossy</strong></strong>. A detail that looked unimportant during summarization might become essential later. A summary may also inadvertently turn an unverified hypothesis into an apparent fact.</p>
+<p>That is why it helps to separate <strong><strong>confirmed facts</strong></strong>, <strong><strong>assumptions</strong></strong>, <strong><strong>failed approaches</strong></strong>, and <strong><strong>next actions</strong></strong>. Where possible, persist durable state in files or a structured store and retrieve the original evidence again when needed.</p>
+<p>The objective is not the smallest possible summary. It is the smallest summary that lets the agent continue <strong>correctly</strong>.</p>
+<h3>Technique 2: Sub-agents — isolating context for focused work</h3>
+<p>Another technique I find particularly interesting is <strong><strong>sub-agent delegation</strong></strong>.</p>
+<p>Instead of having one agent read every file, run every test, implement every change, and perform every review within the same growing context, a main agent can delegate a focused task to another agent with its own context window.</p>
+<p>For example, on a feature implementation:</p>
+<ul>
+<li>
+<p>A <strong><strong>testing agent</strong></strong> reproduces the bug and reports failing tests.</p>
+</li>
+<li>
+<p>An <strong><strong>implementation agent</strong></strong> investigates and applies the code change.</p>
+</li>
+<li>
+<p>A <strong><strong>review agent</strong></strong> inspects the patch for mistakes and edge cases.</p>
+</li>
+<li>
+<p>The <strong><strong>main agent</strong></strong> coordinates the workflow and decides what to do next.</p>
+</li>
+</ul>
+<div class="mermaid">
+flowchart TD
+
+    M[Main agent: plan and coordinate]
+
+    M --&gt; T[Testing agent\nIsolated context]
+
+    M --&gt; I[Implementation agent\nIsolated context]
+
+    M --&gt; R[Review agent\nIsolated context]
+
+    T --&gt; TS[Findings and evidence]
+
+    I --&gt; IS[Patch and change summary]
+
+    R --&gt; RS[Review findings]
+
+    TS --&gt; M
+
+    IS --&gt; M
+
+    RS --&gt; M
+
+    M --&gt; V[Integrate and verify]
+</div>
+<p>Each agent can conduct a detailed investigation but return a much shorter result to the coordinator. That helps the main agent avoid carrying every subordinate's search history and tool outputs.</p>
+<h4>Parallel does not always mean better</h4>
+<p>Sub-agents are not automatically more accurate or efficient. Their value depends on how well the work can be divided.</p>
+<p>They can introduce:</p>
+<ul>
+<li>
+<p><strong><strong>Extra cost:</strong></strong> Several agents may repeat searches, read overlapping files, and use more tokens overall.</p>
+</li>
+<li>
+<p><strong><strong>Coordination overhead:</strong></strong> The main agent must reconcile findings that may disagree.</p>
+</li>
+<li>
+<p><strong><strong>Merge conflicts:</strong></strong> Multiple agents editing the same files can overwrite or interfere with each other's changes.</p>
+</li>
+<li>
+<p><strong><strong>Lost information at handoff:</strong></strong> A short report may omit an important caveat.</p>
+</li>
+<li>
+<p><strong><strong>Dependency problems:</strong></strong> Some tasks cannot safely run in parallel because one depends on another.</p>
+</li>
+</ul>
+<p>In many cases, it is better for a testing agent to investigate first, an implementation agent to act second, and a review agent to inspect the resulting patch third. This is <strong><strong>sequential delegation</strong></strong>, not parallel execution, but still benefits from context isolation.</p>
+<p>I would use parallel sub-agents when tasks are genuinely independent, such as investigating different hypotheses or auditing separate modules. For code changes, clear file ownership, isolated branches or worktrees, and an integration step can reduce conflicts.</p>
+<h3>Technique 3: Note-taking — preserving context outside the conversation</h3>
+<p>Compaction helps with information already inside a conversation, but what about information the agent needs tomorrow, in a fresh session, or after its context is reset?</p>
+<p>One solution is to <strong><strong>write important state outside the model's current context</strong></strong>. Examples include a task checklist, an architecture decision record, a repository instruction file, a structured state object, or an experiment-results table.</p>
+<p>Crucially, saving information is not the same as keeping it permanently in the context window. The agent can retrieve the relevant parts later.</p>
+<p>This is the difference between:</p>
+<ul>
+<li>
+<p><strong><strong>The context window:</strong></strong> What the model sees in the present call.</p>
+</li>
+<li>
+<p><strong><strong>External state or memory:</strong></strong> What the system stores and may selectively supply in future calls.</p>
+</li>
+</ul>
+<p>A robust design also considers trust. Retrieved code comments, web pages, and tool outputs are data, not necessarily authoritative instructions. Agents should not blindly follow instructions embedded in untrusted material.</p>
+<hr />
+<p>There is no single universal ordering. The goal is to ensure the agent has the right information at the moment it needs it, without forcing all information into every model call.</p>
+<p>As LLMs get better at reasoning and tool use, the bottleneck is not always the model's raw capability. It is often the <strong><strong>quality of the information available to it at each step</strong></strong>.</p>
+<p>Prompt engineering still matters. But for agents operating across large codebases, long conversations, and multi-step workflows, a clever prompt alone is rarely enough.</p>
+<p><strong><strong>Context engineering is not about giving an LLM all the information. It is about giving it the right information, at the right time, in the right form — and preserving what matters as the work continues.</strong></strong></p>
+<hr />
+<h2>References and further reading</h2>
+<ul>
+<li>
+<p>Anthropic, <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a>.</p>
+</li>
+<li>
+<p>LangChain, <a href="https://www.langchain.com/blog/context-engineering-for-agents">Context Engineering</a>, July 2, 2025.</p>
+</li>
+<li>
+<p>LangChain, <a href="https://github.com/langchain-ai/context_engineering">Context engineering example notebooks</a>.</p>
+</li>
+</ul>
+
+  </div>
+</article>
+  </main>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</body>
+</html>

@@ -109,6 +109,21 @@ nav {
     margin-bottom: 1rem;
 }
 
+.hero-intro {
+    max-width: 720px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.hero-intro p {
+    margin: 0 0 0.85rem;
+}
+
+.hero-intro p:last-child {
+    margin-bottom: 0;
+}
+
 .social-links {
     margin-top: 2rem;
     display: flex;
