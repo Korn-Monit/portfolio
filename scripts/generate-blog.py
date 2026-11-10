@@ -119,6 +119,7 @@ def render_page(title: str, content: str, depth: int = 1, enable_mermaid: bool =
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(title)} | {SITE_TITLE}</title>
   <meta name="description" content="Technical writing, notes, and engineering articles by {AUTHOR}.">
+  <link rel="icon" href="{prefix}assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="{prefix}styles.css">
   <link rel="stylesheet" href="{prefix}blog/blog.css">
 </head>

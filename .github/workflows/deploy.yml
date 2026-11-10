@@ -1,0 +1,84 @@
+name: Validate and deploy portfolio
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Install uv
+        run: python -m pip install --disable-pip-version-check uv==0.13.7
+
+      - name: Install locked dependencies
+        run: uv sync --locked
+
+      - name: Validate canonical profile
+        run: uv run python -B scripts/validate_profile.py
+
+      - name: Run tests
+        run: uv run python -B -m unittest discover -s tests -v
+
+      - name: Check generated content
+        run: uv run python -B scripts/build_content.py --check
+
+      - name: Compile CV with pinned TeX Live
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # 4.1.0
+        with:
+          root_file: main.tex
+          working_directory: cv
+          docker_image: ghcr.io/xu-cheng/texlive-full:20260701@sha256:d9bfb267e3e3f5e0820ca86e867ee59ebb133fc29561bb28677d9b5a1a9e84ff
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Validate and install compiled CV
+        run: uv run python -B scripts/build_content.py --pdf-source cv/main.pdf
+
+      - name: Assemble static site
+        run: uv run python -B scripts/package_site.py
+
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      actions: read
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

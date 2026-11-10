@@ -6,23 +6,37 @@
 
     <url>
         <loc>https://korn-monit.github.io/portfolio/</loc>
-        <lastmod>2024-03-12</lastmod>
+        <lastmod>2026-11-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://korn-monit.github.io/portfolio/projects</loc>
-        <lastmod>2024-03-12</lastmod>
+        <loc>https://korn-monit.github.io/portfolio/blog/</loc>
+        <lastmod>2026-10-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://korn-monit.github.io/portfolio/about</loc>
-        <lastmod>2024-03-12</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <loc>https://korn-monit.github.io/portfolio/blog/beyond-prompt-engineering/</loc>
+        <lastmod>2026-10-13</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://korn-monit.github.io/portfolio/blog/the-mystery-behind-ai-agents/</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://korn-monit.github.io/portfolio/blog/why-rag-alone-is-not-enough/</loc>
+        <lastmod>2025-09-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
     </url>
 
 </urlset>

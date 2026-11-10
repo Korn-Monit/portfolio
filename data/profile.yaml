@@ -1,0 +1,1016 @@
+schema_version: 2
+settings:
+  portfolio_url: https://korn-monit.github.io/portfolio/
+  resume_filename: assets/resume.pdf
+  cv_page_limit: 1
+person:
+  targets:
+  - cv
+  - portfolio
+  name: Monit Korn
+  title: AI Engineer
+  contacts:
+  - id: email
+    type: email
+    label: kornmonit@gmail.com
+    value: kornmonit@gmail.com
+    targets:
+    - cv
+    - portfolio
+  - id: phone
+    type: phone
+    label: +33 7 44 77 52 25
+    value: +33 7 44 77 52 25
+    targets:
+    - cv
+  - id: location
+    type: location
+    label: Caen, France
+    value: Caen, France
+    targets:
+    - cv
+  links:
+  - id: github
+    label: Korn-Monit
+    url: https://github.com/Korn-Monit
+    targets:
+    - cv
+    - portfolio
+  - id: linkedin
+    label: Monit Korn
+    url: https://www.linkedin.com/in/monit-korn-6a2b61240/
+    targets:
+    - cv
+    - portfolio
+  - id: portfolio
+    label: Monit Korn
+    url: https://korn-monit.github.io/portfolio/
+    targets:
+    - cv
+about:
+  targets:
+  - cv
+  - portfolio
+  portfolio:
+    items:
+    - parts:
+      - type: text
+        value: Hi, I'm Monit, a tech enthusiast based in France with a background in Software Engineering
+          and Artificial Intelligence.
+    - parts:
+      - type: text
+        value: I'm passionate about solving real-world problems through technology and turning ideas into
+          practical solutions. I enjoy exploring new possibilities, tackling challenges, and continuously
+          learning and improving along the way.
+  cv:
+    items:
+    - parts:
+      - type: text
+        value: AI Engineer at Fime with over three years of experience, specializing in AI development,
+          solution design, and production deployment, with a strong software engineering background.
+      - type: link
+        label: My portfolio,
+        url: https://korn-monit.github.io/portfolio/
+        styles:
+        - bold
+      - type: link
+        label: Blog
+        url: https://korn-monit.github.io/portfolio/blog/
+        styles:
+        - bold
+    - parts:
+      - type: text
+        value: Research on
+      - type: text
+        value: Low-rank Adaptation
+        styles:
+        - bold
+      - type: text
+        value: for
+      - type: text
+        value: cross-domain object detection
+        styles:
+        - bold
+      - type: text
+        value: in
+      - type: text
+        value: aerial images
+        styles:
+        - bold
+      - type: text
+        value: ', accepted to'
+        join: none
+      - type: text
+        value: EUSIPCO 2025
+        styles:
+        - bold
+      - type: text
+        value: and
+      - type: text
+        value: published on IEEE Xplore
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+      - type: text
+        value: 'Paper available:'
+        styles:
+        - bold
+      - type: link
+        label: '[IEEE]'
+        url: https://ieeexplore.ieee.org/document/11226338
+        styles:
+        - bold
+        - italic
+education:
+- id: imt-mines-ales
+  targets:
+  - cv
+  - portfolio
+  institution: École nationale supérieure des mines d'Alès
+  degree: Master of Engineering (Diplôme d’Ingénieur Généraliste, Double degree)
+  start: 2023-08
+  end: '2025'
+  location: Alès, France
+  portfolio:
+    institution: IMT Mines Alès
+    degree: MSc in Artificial Intelligence and Data Science
+    dates: 2023 - 2025
+  cv:
+    dates: August 2023 -- 2025
+- id: institute-technology-cambodia
+  targets:
+  - cv
+  - portfolio
+  institution: Institute of Technology of Cambodia
+  degree: Computer Science
+  start: 2019-10
+  end: 2023-09
+  location: Phnom Penh, Cambodia
+  portfolio:
+    degree: BSc in Computer Science
+    dates: 2019 - 2023
+  cv:
+    dates: October 2019 -- September 2023
+experience:
+- id: fime-ai-engineer
+  targets:
+  - cv
+  - portfolio
+  company: Fime
+  role: AI Engineer
+  start: 2025-09
+  end: present
+  location: Caen, France
+  portfolio:
+    dates: 2025 - Present
+    items:
+    - parts:
+      - type: text
+        value: Develop AI Agent applications using both internally built agent harnesses and external
+          frameworks and SDKs, adapting the approach to different internal and customer-facing use cases.
+    - parts:
+      - type: text
+        value: Design AI solutions with architects, integrate agentic workflows into applications, and
+          deploy production-ready features.
+    - parts:
+      - type: text
+        value: Fine tune LLM, build prototypes and proofs of concept, propose technical solutions, and
+          support the team in solving problem.
+  cv:
+    dates: September 2025 -- Present
+    items:
+    - parts:
+      - type: text
+        value: Develop AI Agent applications
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: using both internally built
+        join: space
+      - type: text
+        value: agent SDK
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: and external frameworks/SDKs with MCP/tool calling, adapting the approach to different
+          internal and customer-facing use cases.
+        join: space
+    - parts:
+      - type: text
+        value: Design AI solutions
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: with architects, integrate agentic workflows into applications, and
+        join: space
+      - type: text
+        value: deploy production-ready features on AWS
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+    - parts:
+      - type: text
+        value: Fine-tune LLM, build prototypes and proofs of concept
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: ', propose technical solutions, and support the team in solving problem.'
+        join: none
+- id: cosywee-ai-engineer
+  targets:
+  - cv
+  - portfolio
+  company: Cosywee
+  role: AI Engineer
+  start: 2024-04
+  end: '2025'
+  location: Alès, France
+  portfolio:
+    dates: 2024 - 2025
+    items:
+    - parts:
+      - type: text
+        value: Currently curating and expanding datasets to improve Optical Character Recognition (OCR)
+          performance.
+    - parts:
+      - type: text
+        value: Actively managing and maintaining an OCR model in pre-production, implementing enhancements
+          as needed.
+    - parts:
+      - type: text
+        value: Developing a Chatbot using Agentic RAG to provide dynamic product pricing based on size
+          and additional items, along with general company information.
+  cv:
+    dates: April 2024 -- 2025
+    items:
+    - parts:
+      - type: text
+        value: Developed
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: an
+        join: space
+      - type: text
+        value: Agentic RAG-Based
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: chatbot to provide accurate and real-time answers to user queries on
+        join: space
+      - type: text
+        value: complex price data using LLM and embedding models and a hybrid database (Vector Database
+          and Relational Database)
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+    - parts:
+      - type: text
+        value: Fine-tuned
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: the pre-trained
+        join: space
+      - type: text
+        value: TrOCR
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: model with the company's dataset for general recognition
+        join: space
+      - type: text
+        value: (text, numbers, special characters, etc.)
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+- id: cosywee-ai-engineer-intern
+  targets:
+  - portfolio
+  company: Cosywee
+  role: AI Engineer Intern
+  start: '2024'
+  end: '2024'
+  portfolio:
+    dates: 2024 - 2024
+    items:
+    - parts:
+      - type: text
+        value: Constructed a comprehensive company dataset and ground truth labels to support OCR model
+          fine-tuning.
+    - parts:
+      - type: text
+        value: 'Fine-Tuned a Pre-trained Model:'
+        join: space
+      children:
+      - parts:
+        - type: text
+          value: Optimized a pre-trained TrOCR (Transformer-based OCR model) for general text, numeric,
+            and special character recognition tasks.
+      - parts:
+        - type: text
+          value: Adapted the model specifically to the company's proprietary dataset for enhanced accuracy.
+    - parts:
+      - type: text
+        value: 'Pre-trained and Fine-Tuned a Custom OCR Model:'
+        join: space
+      children:
+      - parts:
+        - type: text
+          value: Developed a CNN-based ResNet-BiLSTM architecture for numeric recognition tasks.
+      - parts:
+        - type: text
+          value: Pre-trained the model using a synthetic and open-source dataset containing ~19 million
+            samples.
+      - parts:
+        - type: text
+          value: Fine-tuned the model on a proprietary dataset of ~20,000 samples to improve performance
+            and robustness.
+    - parts:
+      - type: text
+        value: Developed an automation pipeline to connect to a mail server using Microsoft Graph API
+          and locally download mailboxes containing quotations or purchase orders for OCR.
+- id: imt-mines-ales-rd-mission
+  targets:
+  - portfolio
+  company: IMT Mines Alès
+  role: Research and Development Mission
+  start: '2024'
+  end: '2024'
+  portfolio:
+    dates: 2024 - 2024
+    items:
+    - parts:
+      - type: text
+        value: Build and compare a regression model to forecast the level of glucose in 30 minutes using
+          a hybrid CNN-LSTM model.
+    - parts:
+      - type: text
+        value: Build a classification model to classify a patient's state (hyperglycemia, hypoglycemia,
+          normal) based on the recorded data using the same model.
+- id: geochanvre-intern
+  targets:
+  - portfolio
+  company: GEOCHANVRE
+  role: Intern
+  start: '2024'
+  end: '2024'
+  portfolio:
+    dates: 2024 - 2024
+    items:
+    - parts:
+      - type: text
+        value: Develop an inventory management application and database for the factory's stock control.
+    - parts:
+      - type: text
+        value: Integrate QR codes for each product type into the application.
+- id: vila-research-assistant
+  targets:
+  - cv
+  - portfolio
+  company: ViLa Laboratory
+  role: Research Assistant
+  start: 2022-09
+  end: 2023-07
+  location: Phnom Penh, Cambodia
+  portfolio:
+    dates: 2022 - 2023
+    items:
+    - parts:
+      - type: text
+        value: Experiment by training the model with different hyperparameters and collecting a dataset
+          to train the model.
+    - parts:
+      - type: text
+        value: Assist researchers in various tasks
+    - parts:
+      - type: text
+        value: Participate in the presentation of a poster on the research theme during the national scientific
+          day.
+  cv:
+    dates: September 2022 -- July 2023
+    items:
+    - parts:
+      - type: text
+        value: Experimented
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: by
+        join: space
+      - type: text
+        value: training the DL model
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: with different
+        join: space
+      - type: text
+        value: hyperparameters
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: and
+        join: space
+      - type: text
+        value: collected
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: a dataset for training.
+        join: space
+    - parts:
+      - type: text
+        value: Participated
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: in
+        join: space
+      - type: text
+        value: presenting a research poster
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: at the
+        join: space
+      - type: text
+        value: National Science Day
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+      - type: link
+        label: (certificate)
+        url: https://drive.google.com/file/d/1cWtm5vH7GyA03PuewzNjr5mRTLOPKCVt/view?usp=sharing
+        styles:
+        - italic
+projects:
+- id: plan-tracker
+  targets:
+  - cv
+  - portfolio
+  title: Plan Tracker - Open Source project for Coding with AI
+  technologies:
+  - TypeScript
+  portfolio:
+    items:
+    - parts:
+      - type: text
+        value: Plan Tracker is an open-source extension designed for coding with AI. It helps developers
+          organize implementation plans and monitor progress throughout AI-assisted development.
+      - type: link
+        label: View on GitHub
+        url: https://github.com/Korn-Monit/plan_tracker
+        join: space
+  cv:
+    order: 10
+    dates: January 2025 -- March 2025
+    items:
+    - parts:
+      - type: text
+        value: An Open Source Plan Tracker extension for coding with AI.
+        join: space
+      - type: link
+        label: (Github)
+        url: https://github.com/Korn-Monit/plan_tracker
+        styles:
+        - bold
+- id: ducucite
+  targets:
+  - cv
+  - portfolio
+  title: DocuCite-Agent
+  technologies:
+  - Python
+  - LLM
+  - RAG
+  - MCP
+  - Deep Learning
+  - Fine Tuning
+  - LangChain
+  - PERT
+  - Git
+  portfolio:
+    media:
+    - type: video
+      label: DocuCite-Agent demo
+      url: https://github.com/user-attachments/assets/79a804bb-2560-42b8-9a41-bbdc8da0832b
+    items:
+    - parts:
+      - type: text
+        value: Built a MCP(model context protocol) server that allows users to upload documents and interact
+          with an AI agent that can answer any question based on the uploaded content. Each response includes
+          precise references (page and paragraph number) to the original document, ensuring transparency
+          and easy verification.
+  cv:
+    order: 20
+    title: MCP Q&A AI Agent for Document Comprehension (Hackathon project)
+    dates: May 2025 -- June 2025
+    items:
+    - parts:
+      - type: text
+        value: Implemented
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: a Model Context Protocol (MCP) server that enables an
+        join: space
+      - type: text
+        value: AI agent
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: to answer questions about uploaded documents, providing
+        join: space
+      - type: text
+        value: page and paragraph-level references
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: in responses.
+        join: space
+      - type: link
+        label: (demo)
+        url: '{portfolio_url}#{project_id}'
+        styles:
+        - bold
+- id: academic-chatbot
+  targets:
+  - cv
+  - portfolio
+  title: Academic Chatbot
+  technologies:
+  - Python
+  - LLM
+  - RAG
+  - PyTorch
+  - Deep Learning
+  - Fine Tuning
+  - LangChain
+  - PERT
+  - Git
+  portfolio:
+    media:
+    - type: video
+      label: Academic Chatbot demo
+      url: https://github.com/user-attachments/assets/3ba61ac0-f84b-45bf-babd-4988ba909a1e
+    items:
+    - parts:
+      - type: text
+        value: 'Conducted a comparative study of two chatbot development approaches: fine-tuning and Retrieval-Augmented
+          Generation (RAG).'
+    - parts:
+      - type: text
+        value: Fine-tuned the pre-trained Llama 3.1 8B language model using UnSloth and LoRA, specifically
+          optimized to assist international students by leveraging a custom academic dataset.
+    - parts:
+      - type: text
+        value: Developed and implemented a robust RAG system that combines the Llama 3.1 8B model with
+          a hybrid retrieval mechanism using BM25 and embedding model with reranker(BGE-M3 with BGE-Reranker).
+    - parts:
+      - type: text
+        value: 'The dataset included comprehensive information such as:'
+        join: space
+      children:
+      - parts:
+        - type: text
+          value: Housing and rental options for students.
+      - parts:
+        - type: text
+          value: Study and work conditions for international learners.
+      - parts:
+        - type: text
+          value: Detailed descriptions of courses, curricula, and academic requirements in the Department
+            of Informatics and Artificial Intelligence.
+  cv:
+    order: 50
+    dates: November 2024 -- December 2024
+    items:
+    - parts:
+      - type: text
+        value: Developed an intelligent chatbot
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: combining
+        join: space
+      - type: text
+        value: fine-tuning of Llama 3 8B
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: and
+        join: space
+      - type: text
+        value: RAG with hybrid search (BGE-M3, BGE-Reranker and BM25)
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: for accurate and contextual answers.
+        join: space
+      - type: link
+        label: (demo)
+        url: '{portfolio_url}#{project_id}'
+        styles:
+        - bold
+- id: object-detection
+  targets:
+  - cv
+  - portfolio
+  title: Application of the LoRA on Object Detection model
+  technologies:
+  - Python
+  - PyTorch
+  - Transformer
+  - LoRA
+  - Git
+  portfolio:
+    items:
+    - parts:
+      - type: text
+        value: This research project was conducted in collaboration with a PhD student from Sorbonne University.
+          The objective was to explore the application of LoRA (Low-Rank Adaptation) to enhance the performance
+          of DiffusionDet, an object detection model, under few-shot learning conditions. The goal was
+          to evaluate whether LoRA can effectively adapt the model to new object categories using limited
+          annotated data, improving efficiency and generalization in low-resource scenarios.
+    - parts:
+      - type: text
+        value: We applied this approach to aerial imagery datasets, specifically DOTA (Dataset for Object
+          Detection in Aerial Images) and DIOR (Dataset for Object Recognition in Aerial Images). These
+          datasets contain complex scenes with multiple object classes captured from aerial perspectives,
+          making them ideal for evaluating few-shot object detection in real-world scenarios.
+    - parts:
+      - type: text
+        value: 'The paper can be found here:'
+      - type: link
+        label: Preprint, arXiv:2504.06330
+        url: https://arxiv.org/abs/2504.06330
+  cv:
+    order: 30
+    title: Applying LoRA to Object Detection Model (IEEE)
+    dates: January 2025 -- March 2025
+    items:
+    - parts:
+      - type: text
+        value: Implemented LoRA on DiffusionDet
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: 'on'
+        join: space
+      - type: text
+        value: aerial datasets (DIOR, DOTA)
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: in
+        join: space
+      - type: text
+        value: few-shot learning
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: scenarios.
+        join: space
+      - type: link
+        label: (more details)
+        url: '{portfolio_url}#{project_id}'
+        styles:
+        - bold
+      - type: link
+        label: '[Preprint, arXiv:2504.06330]'
+        url: https://arxiv.org/abs/2504.06330
+        styles:
+        - italic
+- id: ocr
+  targets:
+  - cv
+  - portfolio
+  title: Handwritten Text Recognition with Fine-Tuned TrOCR
+  technologies:
+  - Python
+  - PyTorch
+  - Transformer
+  - LoRA
+  - Git
+  portfolio:
+    media:
+    - type: video
+      label: Handwritten Text Recognition demo
+      url: https://github.com/user-attachments/assets/9c08b124-290e-45eb-88f7-775e8118e7c6
+    items:
+    - parts:
+      - type: text
+        value: This project fine-tunes the microsoft/trocr-large-handwritten model from Hugging Face for
+          handwritten text recognition on a custom dataset. The goal is to adapt the model to recognize
+          specific handwritten text styles or domains with improved accuracy.
+  cv:
+    order: 40
+    title: Handwritten Text OCR
+    dates: March 2025 -- April 2025
+    items:
+    - parts:
+      - type: text
+        value: Fine-tuned
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: a pre-trained model on a
+        join: space
+      - type: text
+        value: custom dataset
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: for
+        join: space
+      - type: text
+        value: handwritten text recognition
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+      - type: link
+        label: (demo)
+        url: '{portfolio_url}#{project_id}'
+        styles:
+        - bold
+- id: object-classification
+  targets:
+  - portfolio
+  title: Object classification
+  technologies:
+  - Python
+  - PyTorch
+  - Git
+  - Google Cloud Platform
+  - FastAPI
+  - Docker
+  - Streamlit
+  portfolio:
+    media:
+    - type: video
+      label: Object classification demo
+      url: https://github.com/user-attachments/assets/ae1c0d9a-5c9c-4c3d-885f-fecacd865b87
+    items:
+    - parts:
+      - type: text
+        value: 'Trained a MobileViT model on the SPOTS-10: Animal Pattern dataset to classify animals
+          based on their body patterns and textures, and on the CIFAR-10 dataset to classify objects.
+          Developed an API using FastAPI, deployed the model trained on CIFAR-10 with Docker on Google
+          Cloud Platform, and created a user interface hosted on Streamlit Community Cloud.'
+- id: asr
+  targets:
+  - portfolio
+  title: Automatic Speech Recognition (ASR)
+  technologies:
+  - Python
+  - PyTorch
+  - Deep Learning
+  - Fine Tuning
+  - Transformers
+  items:
+  - parts:
+    - type: text
+      value: Developed and fine-tuned the Whisper Automatic Speech Recognition (ASR) model using the PolyAI/minds14
+        dataset to enhance performance for speech-to-text applications.
+- id: handmotion-prediction
+  targets:
+  - portfolio
+  title: HandMotion Prediction
+  technologies:
+  - Python
+  - Data Analysis
+  - PyTorch
+  - Time-series
+  - Git
+  items:
+  - parts:
+    - type: text
+      value: Developing a machine learning project to predict the acceleration of patients hands, providing
+        one prediction per second for each hand from 7 AM to 7 PM. The dataset contains acceleration values
+        (x, y, z) for both hands and corresponding timestamps, with 50 data points recorded per second.
+        Responsibilities include synchronizing datasets for both hands by aligning timestamps, handling
+        missing data through linear interpolation, and training a Long Short-Term Memory (LSTM) model
+        to produce accurate, second-level predictions.
+- id: e-commerce
+  targets:
+  - portfolio
+  title: E-Commerce Web application
+  technologies:
+  - JavaScript
+  - PHP
+  - Vue.js
+  - Laravel
+  - HTML
+  - CSS
+  - Tailwind
+  - Git
+  items:
+  - parts:
+    - type: text
+      value: Developed a web application for sports shoe sales using a Vue.js frontend and a Laravel backend.
+        The frontend, built with Vue.js, provided a dynamic and responsive user interface, enabling users
+        to browse products, filter by size, brand, and category, and manage their shopping cart in real
+        time. The backend, powered by Laravel, handled key functionalities such as user authentication,
+        product management, inventory tracking, order processing, and payment integration. The system
+        also included an admin dashboard for managing product listings, viewing sales analytics, and handling
+        customer queries. The application aimed to deliver a seamless e-commerce experience optimized
+        for both desktop and mobile users.
+- id: cafe-system
+  targets:
+  - portfolio
+  title: Café System
+  technologies:
+  - Java
+  - Spring Boot
+  - HTML
+  - CSS
+  - Tailwind
+  - JavaScript
+  - Git
+  items:
+  - parts:
+    - type: text
+      value: Developed a Point of Sale (POS) management system for a café using Java and the Spring Boot
+        backend framework. The system was designed to streamline daily operations by managing orders,
+        inventory, tables, billing, and staff roles. Key features included real-time order tracking, digital
+        receipts, menu management, and role-based access for cashiers and administrators. The backend
+        was built with Spring Boot to ensure scalability, modularity, and efficient API handling. The
+        application aimed to improve service speed, reduce human error, and provide insightful sales reports
+        for business analysis.
+- id: air-writing
+  targets:
+  - portfolio
+  title: Air Writing
+  technologies:
+  - Python
+  - PyTorch
+  - Git
+  items:
+  - parts:
+    - type: text
+      value: Collected and prepared Khmer dataset to train and fine-tune an existing machine learning
+        model with the goal of improving its prediction accuracy. The process involved data cleaning,
+        augmentation, and labeling to ensure high-quality input. The model was retrained using the updated
+        dataset, followed by performance evaluation through metrics such as accuracy, precision, recall,
+        and F1-score. This iterative process helped enhance the model’s generalization and reliability
+        in real-world scenarios.
+skills:
+- id: portfolio-technology
+  targets:
+  - portfolio
+  title: Technology
+  items:
+  - Python
+  - PyTorch
+  - FastAPI
+  - JavaScript
+  - Shell Scripting
+  - Vue.js
+  - HTML/CSS
+  - Docker
+  - Google Cloud Platform
+  - LangChain
+  - LangGraph
+  - Linux
+  - Git
+- id: portfolio-ai-areas
+  targets:
+  - portfolio
+  title: AI / ML / Tech Areas
+  items:
+  - AI Agents
+  - RAG
+  - MCP
+  - Deep Learning
+  - Deep Reinforcement Learning
+  - LLM
+  - OCR
+  - Software Development
+- id: cv-programming-languages
+  targets:
+  - cv
+  title: Programming Languages
+  items:
+  - Python
+  - JavaScript
+  - HTML/CSS
+  - R
+  - SQL
+- id: cv-tools-cloud-databases
+  targets:
+  - cv
+  title: Tools/Cloud/Databases
+  items:
+  - Linux
+  - Docker
+  - MySQL
+  - PostgreSQL
+  - Vector Database
+- id: cv-frameworks-libraries
+  targets:
+  - cv
+  title: Frameworks/Libraries
+  items:
+  - PyTorch
+  - Transformers
+  - FastAPI
+  - LangChain/LangGraph
+  - Unsloth
+  - Vue.js
+- id: cv-other-skills
+  targets:
+  - cv
+  title: Others
+  items:
+  - CI/CD
+  - MCP
+  - AI Agent
+  - RAG
+  - Software Development
+- id: cv-languages
+  targets:
+  - cv
+  title: Languages
+  items:
+  - Khmer – Native
+  - English – Advanced
+  - French – Intermediate
+certifications:
+- id: hugging-face-mcp-fundamentals
+  targets:
+  - portfolio
+  title: Fundamentals of MCP
+  issuer: Hugging Face
+  date: '2024'
+  link: https://drive.google.com/file/d/1czVQsVSKyvkJpmyNjsa0I2d861IjdvKk/view?usp=sharing
+- id: hugging-face-llm
+  targets:
+  - portfolio
+  title: LLM
+  issuer: Hugging Face
+  date: '2025'
+  link: https://drive.google.com/file/d/1VKH7Enj34OHoI9K27NFKovIxacDqoxSj/view?usp=sharing
+- id: hugging-face-ai-agents-fundamentals
+  targets:
+  - portfolio
+  title: AI Agents Fundamentals
+  issuer: Hugging Face
+  date: '2025'
+  link: https://drive.google.com/file/d/1QndLNzEzg7N0CpUxgYWBhqXDPOdXOcQe/view?usp=sharing
+- id: coursera-advanced-learning-algorithms
+  targets:
+  - portfolio
+  title: Advanced Learning Algorithms
+  issuer: Coursera
+  date: '2024'
+  link: https://www.coursera.org/account/accomplishments/verify/8ALUPZRDWUNY
+- id: coursera-ml-regression-classification
+  targets:
+  - portfolio
+  title: 'ML: Regression and Classification'
+  issuer: Coursera
+  date: '2024'
+  link: https://www.coursera.org/account/accomplishments/verify/WKVBV7H58XPA
