@@ -168,48 +168,32 @@ experience:
     items:
     - parts:
       - type: text
-        value: Develop AI Agent applications using both internally built agent harnesses and external
-          frameworks and SDKs, adapting the approach to different internal and customer-facing use cases.
+        value: Contribute to the development and scaling of AI products, integrating AI capabilities into existing applications and tools using microservices and distributed architectures.
     - parts:
       - type: text
-        value: Design AI solutions with architects, integrate agentic workflows into applications, and
-          deploy production-ready features.
+        value: Develop AI Agent applications using internally developed agent SDKs and external frameworks, leveraging MCP, tool calling, RAG, and agentic workflows for internal and customer-facing use cases.
     - parts:
       - type: text
-        value: Fine tune LLM, build prototypes and proofs of concept, propose technical solutions, and
-          support the team in solving problem.
+        value: Collaborate with software architects and cross-functional teams to design scalable AI solutions, integrate agentic workflows into existing systems, and deploy production-ready services on AWS.
+    - parts:
+      - type: text
+        value: Fine-tune LLMs, develop prototypes and proofs of concept (PoCs), propose technical solutions, and contribute to solving complex engineering challenges.
   cv:
     dates: September 2025 -- Present
     items:
     - parts:
       - type: text
-        value: Develop AI Agent applications
+        value: Contribute to the development and scaling of
+      - type: text
+        value: AI products
         join: space
         styles:
         - bold
       - type: text
-        value: using both internally built
-        join: space
+        value: ', integrating AI capabilities into existing applications and tools using'
+        join: none
       - type: text
-        value: agent SDK
-        join: space
-        styles:
-        - bold
-      - type: text
-        value: and external frameworks/SDKs with MCP/tool calling, adapting the approach to different
-          internal and customer-facing use cases.
-        join: space
-    - parts:
-      - type: text
-        value: Design AI solutions
-        join: space
-        styles:
-        - bold
-      - type: text
-        value: with architects, integrate agentic workflows into applications, and
-        join: space
-      - type: text
-        value: deploy production-ready features on AWS
+        value: microservices and distributed architectures
         join: space
         styles:
         - bold
@@ -218,12 +202,65 @@ experience:
         join: none
     - parts:
       - type: text
-        value: Fine-tune LLM, build prototypes and proofs of concept
+        value: Develop
+      - type: text
+        value: AI Agent applications
         join: space
         styles:
         - bold
       - type: text
-        value: ', propose technical solutions, and support the team in solving problem.'
+        value: using internally developed
+        join: space
+      - type: text
+        value: agent SDKs
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: and external frameworks, leveraging
+        join: space
+      - type: text
+        value: MCP, tool calling, RAG, and agentic workflows
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: for internal and customer-facing use cases.
+        join: space
+    - parts:
+      - type: text
+        value: Collaborate with software architects and cross-functional teams to design
+      - type: text
+        value: scalable AI solutions
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: ', integrate agentic workflows into existing systems, and deploy'
+        join: none
+      - type: text
+        value: production-ready services on AWS
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: .
+        join: none
+    - parts:
+      - type: text
+        value: Fine-tune LLMs
+        styles:
+        - bold
+      - type: text
+        value: ', develop prototypes and'
+        join: none
+      - type: text
+        value: proofs of concept (PoCs)
+        join: space
+        styles:
+        - bold
+      - type: text
+        value: ', propose technical solutions, and contribute to solving complex problems.'
         join: none
 - id: cosywee-ai-engineer
   targets:
@@ -505,7 +542,6 @@ projects:
         - bold
 - id: ducucite
   targets:
-  - cv
   - portfolio
   title: DocuCite-Agent
   technologies:
@@ -911,7 +947,7 @@ skills:
   - Vue.js
   - HTML/CSS
   - Docker
-  - Google Cloud Platform
+  - Google Cloud
   - LangChain
   - LangGraph
   - Linux
@@ -949,6 +985,7 @@ skills:
   - MySQL
   - PostgreSQL
   - Vector Database
+  - Kubernetes
 - id: cv-frameworks-libraries
   targets:
   - cv

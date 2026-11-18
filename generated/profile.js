@@ -40,7 +40,7 @@ window.PROFILE_DATA = {
                     "parts": [
                         {
                             "type": "text",
-                            "value": "Develop AI Agent applications using both internally built agent harnesses and external frameworks and SDKs, adapting the approach to different internal and customer-facing use cases."
+                            "value": "Contribute to the development and scaling of AI products, integrating AI capabilities into existing applications and tools using microservices and distributed architectures."
                         }
                     ]
                 },
@@ -48,7 +48,7 @@ window.PROFILE_DATA = {
                     "parts": [
                         {
                             "type": "text",
-                            "value": "Design AI solutions with architects, integrate agentic workflows into applications, and deploy production-ready features."
+                            "value": "Develop AI Agent applications using internally developed agent SDKs and external frameworks, leveraging MCP, tool calling, RAG, and agentic workflows for internal and customer-facing use cases."
                         }
                     ]
                 },
@@ -56,7 +56,15 @@ window.PROFILE_DATA = {
                     "parts": [
                         {
                             "type": "text",
-                            "value": "Fine tune LLM, build prototypes and proofs of concept, propose technical solutions, and support the team in solving problem."
+                            "value": "Collaborate with software architects and cross-functional teams to design scalable AI solutions, integrate agentic workflows into existing systems, and deploy production-ready services on AWS."
+                        }
+                    ]
+                },
+                {
+                    "parts": [
+                        {
+                            "type": "text",
+                            "value": "Fine-tune LLMs, develop prototypes and proofs of concept (PoCs), propose technical solutions, and contribute to solving complex engineering challenges."
                         }
                     ]
                 }
@@ -280,7 +288,7 @@ window.PROFILE_DATA = {
                 "Vue.js",
                 "HTML/CSS",
                 "Docker",
-                "Google Cloud Platform",
+                "Google Cloud",
                 "LangChain",
                 "LangGraph",
                 "Linux",
